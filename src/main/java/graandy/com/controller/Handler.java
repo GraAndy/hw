@@ -51,15 +51,12 @@ public class Handler {
 	@Transactional
 	public @ResponseBody Film printFilm(@PathVariable Long id) {
 		//if (filmDao.FilmById(id) == null)
-		
 		return filmDao.FilmById(id);
 	}
 	@RequestMapping(value = "films", method = RequestMethod.GET)
 	@Transactional
-	public @ResponseBody List<Film> Display_all() {	
-		return (List<Film>) filmDao.get_all_films();
+	public @ResponseBody List<Film> Display_all() {
+		List<Film> f = (List<Film>) filmDao.get_all_films();
+		return f;
 	}
-	
-	
-	
 }
