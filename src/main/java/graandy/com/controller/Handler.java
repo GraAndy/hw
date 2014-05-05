@@ -1,13 +1,13 @@
 package graandy.com.controller;
 
-import java.util.List;
-
-import javax.transaction.Transactional;
-
-import graandy.com.api.IFilmConverter;
 import graandy.com.dao.IFilmDao;
 import graandy.com.entity.Film;
 import graandy.com.entity.ShortFilm;
+import graandy.com.util.Converter;
+
+import java.util.List;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,8 +22,6 @@ public class Handler {
 	
 	@Autowired
 	IFilmDao filmDao;
-	//@Autowired
-	IFilmConverter filmConverter;
 	
 	@RequestMapping(value = "films1", method = RequestMethod.POST)
 	@Transactional
@@ -61,7 +59,7 @@ public class Handler {
 	@Transactional
 	public @ResponseBody List<ShortFilm> Display_all() {
 		List<Film> f = (List<Film>) filmDao.get_all_films();
-		List<ShortFilm> s = (List<ShortFilm>) filmConverter.FilmConvert(f);
+		List<ShortFilm> s = (List<ShortFilm>) Converter.filmConvert(f);
 		return s;
 	}
 }
