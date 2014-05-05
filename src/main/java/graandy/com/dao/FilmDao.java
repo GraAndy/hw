@@ -30,7 +30,6 @@ public Film FilmById(Long id){
 @SuppressWarnings("unchecked")
 @Override
 public List<Film> get_all_films() {
-	// TODO Auto-generated method stub
 	Session s = sf.getCurrentSession();
 	List<Film> result = s.createCriteria("graandy.com.entity.Film").list();
 	return result;

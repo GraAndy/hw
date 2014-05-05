@@ -1,5 +1,6 @@
 package graandy.com.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -130,9 +131,11 @@ public class Film {
 		this.director = director;
 		this.stars = stars;
 		this.description = description;
+		this.comments = new ArrayList<>();
 	}
 
 	public Film() {
+		this.comments = new ArrayList<>();
 	}
 
 	public void SetFilm(String name, int release_year, String country,
