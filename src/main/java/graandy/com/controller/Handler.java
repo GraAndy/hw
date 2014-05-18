@@ -52,8 +52,9 @@ public class Handler {
 	@RequestMapping(value = "films/{id}", method = RequestMethod.GET)
 	@Transactional
 	public @ResponseBody Film printFilm(@PathVariable Long id) {
-		//if (filmDao.FilmById(id) == null)
-		return filmDao.FilmById(id);
+		Film f = filmDao.FilmById(id);
+		f.setComments(Converter.commentConvert(f.getComments()));
+		return f;
 	}
 	@RequestMapping(value = "films", method = RequestMethod.GET)
 	@Transactional
