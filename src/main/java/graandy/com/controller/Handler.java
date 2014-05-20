@@ -38,16 +38,11 @@ public class Handler {
 	
 	@RequestMapping(value = "films", method = RequestMethod.POST)
 	@Transactional
-	public @ResponseBody Film Add_film(@RequestBody Film film) {
+	public @ResponseBody Film add_film(@RequestBody Film film) {
 		film = filmDao.add_film(film);
 		return film;
 	}
-	
-	@RequestMapping("hello")
-	@Transactional
-	public @ResponseBody String printWelcomePerson(String name, Double number) {
-		return "Hi " + name + ", your number is " + number;
-	}
+	 	
 	
 	@RequestMapping(value = "films/{id}", method = RequestMethod.GET)
 	@Transactional
@@ -56,11 +51,30 @@ public class Handler {
 		f.setComments(Converter.commentConvert(f.getComments()));
 		return f;
 	}
+	@RequestMapping(value = "films", method = RequestMethod.GET, params = {"name"})
+	@Transactional
+	public @ResponseBody List<Film> printFilmByName(String name) {
+		List<Film> f = filmDao.FindByName(name);
+		for (Film i : f){
+		i.setComments(Converter.commentConvert(i.getComments()));
+	}
+		return f;
+	}
+	@RequestMapping(value = "films/{id}", method = RequestMethod.DELETE)
+	@Transactional
+	public @ResponseBody String deleteFilm(@PathVariable Long id) {
+		Film f = filmDao.FilmById(id);
+		f.setComments(Converter.commentConvert(f.getComments()));
+		filmDao.delete_film(f);
+		return "Deleted";
+	}
+	
 	@RequestMapping(value = "films", method = RequestMethod.GET)
 	@Transactional
-	public @ResponseBody List<ShortFilm> Display_all() {
+	public @ResponseBody List<ShortFilm> displayAll() {
 		List<Film> f = (List<Film>) filmDao.get_all_films();
 		List<ShortFilm> s = (List<ShortFilm>) Converter.filmConvert(f);
 		return s;
 	}
+	
 }

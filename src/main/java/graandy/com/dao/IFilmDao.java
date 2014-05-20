@@ -11,4 +11,10 @@ public interface IFilmDao {
 	Film FilmById(Long id);
 	
 	List<Film> get_all_films();
+
+
+	List<Film> FindByName(String name);
+
+
+	Boolean delete_film(Film film);
 }

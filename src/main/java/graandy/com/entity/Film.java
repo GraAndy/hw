@@ -2,6 +2,7 @@ package graandy.com.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+
 
 @Entity
 public class Film {
@@ -116,7 +118,7 @@ public class Film {
 		this.comments = comments;
 	}
 	
-	@OneToMany(mappedBy = "film")
+	@OneToMany(mappedBy = "film", cascade = {CascadeType.REMOVE} )
 	List<Comment> comments;
 
 	public Film(String name, int release_year, String country, String genre,
